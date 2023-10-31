@@ -13,6 +13,8 @@
     "@dnd-kit/core": "latest-compatible-version",
     "@dnd-kit/modifiers": "^6.0.1",
     "@dnd-kit/sortable": "^7.0.2",
+    "@nextui-org/react": "^2.1.13",
+    "framer-motion": "^10.16.4",
     "react": "^18.2.0",
     "react-beautiful-dnd": "^13.1.1",
     "react-dnd": "^16.0.1",
