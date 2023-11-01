@@ -6,7 +6,8 @@ import {
   TouchSensor,
   DragOverlay,
   useSensor,
-  useSensors
+  useSensors,
+  KeyboardSensor
 } from "@dnd-kit/core"
 import {
   arrayMove,
@@ -28,13 +29,23 @@ import image10 from '../../public/images/image-10.jpeg';
 import image11 from '../../public/images/image-11.jpeg';
 import SortableItem from "./SortableItem"
 import Item from "../Components/Item/Item"
+import { Button, Card, CardBody } from "@nextui-org/react";
 
 const App = () => {
   const images = [image1, image2, image3, image4, image5, image6, image7, image8, image9, image10, image11];
   const [deletedImg, setDeletedImg] = useState([]);
   const [items, setItems] = useState(images)
-  const [activeId, setActiveId] = useState(null)
-  const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor))
+  const [activeId, setActiveId] = useState(null);
+  const handleDeleteImg = () => {
+    const filteredArray1 = items.filter(item => !deletedImg.includes(item));
+    setDeletedImg([])
+    setItems(filteredArray1)
+  }
+  const sensors = useSensors(useSensor(MouseSensor), useSensor(TouchSensor, {
+    activationConstraint: {
+      distance: 8,
+    },
+  }))
 console.log(items);
   const handleDragStart = useCallback(event => {
     setActiveId(event.active.id)
@@ -57,16 +68,25 @@ console.log(items);
     setActiveId(null)
   }, [])
   console.log(deletedImg);
-  return (
-    <DndContext
+  return ( 
+    <div className="max-w-6xl mx-auto bg-[#fafafa]">
+      <Card className="p-5 md:p-8 my-8">
+      <div className="flex justify-between">
+        <p className="text-xl font-semibold">Item Selected {deletedImg.length}</p>
+      <Button onClick={handleDeleteImg} className="float-right" color="primary" variant="ghost">
+        Delete
+      </Button> 
+      </div>
+      <DndContext
       sensors={sensors}
       collisionDetection={closestCenter}
       onDragStart={handleDragStart}
       onDragEnd={handleDragEnd}
       onDragCancel={handleDragCancel}
-    >
+      >
+      
       <SortableContext items={items} strategy={rectSortingStrategy}>
-        <div className="grid grid-cols-5 gap-8 w-max mx-auto my-10"> 
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 w-max mx-auto"> 
           {items.map((id, index)=> (
             <SortableItem key={index} deletedImg={deletedImg} setDeletedImg={setDeletedImg} index={index} id={id} />
           ))}
@@ -78,6 +98,10 @@ console.log(items);
         {activeId ? <Item id={activeId} isDragging /> : null}
       </DragOverlay>
     </DndContext>
+      </Card>
+    </div>
+    
+    
   )
 }
 
