@@ -1,21 +1,21 @@
-import { useSortable } from "@dnd-kit/sortable"
-import { CSS } from "@dnd-kit/utilities"
-import Item from "../Components/Item/Item"
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import Item from "../Components/Item/Item";
 
-const SortableItem = props => {
+const SortableItem = (props) => {
   const {
     isDragging,
     attributes,
     listeners,
     setNodeRef,
     transform,
-    transition
-  } = useSortable({ id: props.id })
+    transition,
+  } = useSortable({ id: props.id });
 
   const style = {
     transform: CSS.Transform.toString(transform),
-    transition: transition || undefined
-  }
+    transition: transition || undefined,
+  };
 
   return (
     <Item
@@ -26,7 +26,7 @@ const SortableItem = props => {
       {...attributes}
       {...listeners}
     />
-  )
-}
+  );
+};
 
 export default SortableItem;
