@@ -7,7 +7,6 @@ import {
   DragOverlay,
   useSensor,
   useSensors,
-  KeyboardSensor,
 } from "@dnd-kit/core";
 import {
   arrayMove,
@@ -26,9 +25,10 @@ import image8 from "../../public/images/image-8.webp";
 import image9 from "../../public/images/image-9.webp";
 import image10 from "../../public/images/image-10.jpeg";
 import image11 from "../../public/images/image-11.jpeg";
+import addImage from "../../public/images/add-photo.png";
 import SortableItem from "./SortableItem";
 import Item from "../Components/Item/Item";
-import { Button, Card, CardBody, Checkbox } from "@nextui-org/react";
+import { Button, Card, Checkbox } from "@nextui-org/react";
 
 const App = () => {
   const images = [
@@ -60,7 +60,6 @@ const App = () => {
       },
     })
   );
-  console.log(items);
   const handleDragStart = useCallback((event) => {
     setActiveId(event.active.id);
   }, []);
@@ -81,10 +80,9 @@ const App = () => {
   const handleDragCancel = useCallback(() => {
     setActiveId(null);
   }, []);
-  console.log(deletedImg);
   return (
     <div className="max-w-6xl mx-auto bg-[#fafafa]">
-      <Card className="p-5 md:p-8 mx-4 md:mx-0 my-8">
+      <Card className="p-4 md:p-8 mx-4 md:mx-0 my-8">
         <div className="flex justify-between mb-3">
           {deletedImg.length === 0 ? (
             <h3 className="text-2xl uppercase font-semibold">
@@ -93,7 +91,7 @@ const App = () => {
           ) : (
             <div className="flex justify-center items-center gap-1">
               <Checkbox isSelected={true}></Checkbox>{" "}
-              <p className="text-xl uppercase font-semibold">
+              <p className="text-lg md:text-xl uppercase font-semibold">
                 Image Selected: {deletedImg.length}
               </p>
             </div>
@@ -126,6 +124,10 @@ const App = () => {
                     id={id}
                   />
                 ))}
+                <div className="w-[144px] flex flex-col gap-2 rounded-[10px] cursor-pointer border-2 border-dashed border-slate-300 justify-center items-center h-[144px] bg-slate-100">
+                  <img className="w-8 h-8" src={addImage} alt="" />
+                  <h4>Add Images</h4>
+                </div>
               </div>
             ) : (
               <div>

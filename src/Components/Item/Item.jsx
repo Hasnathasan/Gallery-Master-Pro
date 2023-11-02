@@ -50,7 +50,7 @@ const Item = forwardRef(
       backgroundColor: "#ffffff",
       display: "flex",
       justifyContent: "center",
-      touchAction: "none",
+      touchAction: 'none',
       alignItems: "center",
       boxShadow: isDragging
         ? "rgb(63 63 68 / 5%) 0px 2px 0px 2px, rgb(34 33 81 / 15%) 0px 2px 3px 2px"
@@ -82,7 +82,7 @@ const Item = forwardRef(
             onValueChange={handleDeletedImages}
           ></Checkbox>
           {hovered && (
-            <div className="absolute rounded-[10px] inset-0 bg-black bg-opacity-50 pointer-events-none z-10"></div>
+            <div className={`absolute ${index === 0 ? "hidden" : ""} rounded-[10px] inset-0 bg-black bg-opacity-50 pointer-events-none z-10`}></div>
           )}
         </div>
       </>
